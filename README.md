@@ -2,11 +2,11 @@
 
 Clear writing for Claude Code, Codex, and Cursor.
 
-> **The problem:** AI coding agents often bury a useful answer under shorthand, jargon,
-> long sentences, and confidence they have not earned.
->
-> **The fix:** Spare Me rewrites the answer in plain language without changing the facts,
-> numbers, commands, file paths, warnings, or places where the agent is unsure.
+**The problem:** AI coding agents often bury a useful answer under shorthand, jargon,
+ long sentences, and confidence they have not earned.
+
+**The fix:** Spare Me rewrites the answer in plain language without changing the facts,
+ numbers, commands, file paths, warnings, or places where the agent is unsure.
 
 ## Ever seen Claude talk like this?
 
