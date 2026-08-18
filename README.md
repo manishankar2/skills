@@ -13,6 +13,26 @@ Born from a real problem: agent replies that need three readings to understand. 
 rules are the "Agent Communication Standard" I keep in my projects' CLAUDE.md, embedded
 verbatim so the command works anywhere.
 
+### Example
+
+Before — an agent reply the way agents usually write:
+
+> Root-caused the flakiness: the retry path re-acquires the lease post-TTL-expiry →
+> double-dispatch → dupe rows (the idempotency key only guards the happy path).
+> Mitigation: fence w/ a monotonic epoch — lease-holder bumps on acquire, consumers
+> no-op on stale-epoch writes — net-net dupes go from probabilistically rare to
+> structurally impossible. Should be fine for prod; perf impact negligible.
+
+After `/spare-me`:
+
+> The duplicate rows are fixed. The cause: when a worker's lease expired, the retry
+> path handed the same job to a second worker. Both workers wrote results, and the
+> idempotency key only prevented duplicates when the first worker finished cleanly.
+> The fix is an epoch fence. Each time a worker takes the lease, it increments an
+> epoch number, and writes carrying an old epoch number are ignored. Duplicates are
+> now impossible by design, not just unlikely. One limitation: the fix adds one
+> integer comparison per write, and I have not measured the performance cost.
+
 ### Usage
 
 | Invocation | What it rewrites |
