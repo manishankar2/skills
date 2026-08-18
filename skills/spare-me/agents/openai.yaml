@@ -1,0 +1,6 @@
+interface:
+  display_name: "Spare Me"
+  short_description: "Turn AI-shaped prose into clear writing"
+  default_prompt: "Use $spare-me to rewrite the previous reply clearly without changing its meaning."
+policy:
+  allow_implicit_invocation: false

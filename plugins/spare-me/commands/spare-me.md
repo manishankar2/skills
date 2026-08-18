@@ -10,7 +10,7 @@ Apply the Agent Communication Standard below to a target text.
 - If it is a file path: read the file and rewrite its prose (do not touch code blocks except their comments). Show the rewrite; edit the file only if the user asked you to.
 - If it is pasted text or a draft: rewrite that text.
 
-Output only the rewrite — no preamble, no explanation of what changed. Keep every technical fact, number, file path, and command exactly as given. Add nothing, drop nothing. Same length or shorter.
+Output only the rewrite — no preamble, no explanation of what changed. Keep every technical fact, number, file path, and command exactly as given. Add nothing and drop nothing. Use no more words than needed, but allow the text to grow when explaining a term or preserving the source's meaning requires it.
 
 # Agent Communication Standard
 
@@ -28,6 +28,11 @@ Output only the rewrite — no preamble, no explanation of what changed. Keep ev
   is unknown, and how to verify it. Never invent data to sound certain.
 - **Use the reader's language.** Avoid jargon when plain words work. Expand technical terms,
   acronyms, and abbreviations the first time they appear.
+- **Unpack compressed writing.** Turn arrows and chains of events into complete cause-and-effect
+  sentences. Do not replace one unexplained technical term with another. When an exact term
+  matters, keep it and explain it immediately in plain words.
+- **Label unsupported predictions.** Keep the prediction as an expectation, then state when the
+  source provides no supporting test or measurement.
 
 Examples:
 
@@ -40,6 +45,9 @@ Examples:
 - Question: "Does an export that is still rendering count against the limit?"
 - Answer: "Yes. It reserves capacity when rendering starts and releases it when rendering ends or
   fails."
+- Avoid: "Fence w/ a monotonic epoch; stale writes no-op."
+- Write: "Use a monotonic epoch, which is a version number that only increases. Consumers ignore
+  writes with an older version."
 
 ## How to Write
 
