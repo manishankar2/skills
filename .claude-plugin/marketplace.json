@@ -1,0 +1,14 @@
+{
+  "name": "mani-skills",
+  "owner": {
+    "name": "Mani Shankar",
+    "url": "https://github.com/manishankar2"
+  },
+  "plugins": [
+    {
+      "name": "spare-me",
+      "source": "./plugins/spare-me",
+      "description": "Rewrite the previous reply — or any text you point at — per the Agent Communication Standard: answer first, short sentences, evidence over adjectives, no jargon."
+    }
+  ]
+}

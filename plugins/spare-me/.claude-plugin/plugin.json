@@ -1,0 +1,9 @@
+{
+  "name": "spare-me",
+  "description": "Rewrite the previous reply — or any text you point at — per the Agent Communication Standard: answer first, short sentences, evidence over adjectives, no jargon.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Mani Shankar",
+    "url": "https://github.com/manishankar2"
+  }
+}
