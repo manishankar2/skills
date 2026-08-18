@@ -17,21 +17,18 @@ verbatim so the command works anywhere.
 
 Before — an agent reply the way agents usually write:
 
-> Root-caused the flakiness: the retry path re-acquires the lease post-TTL-expiry →
-> double-dispatch → dupe rows (the idempotency key only guards the happy path).
-> Mitigation: fence w/ a monotonic epoch — lease-holder bumps on acquire, consumers
-> no-op on stale-epoch writes — net-net dupes go from probabilistically rare to
-> structurally impossible. Should be fine for prod; perf impact negligible.
+> Fixed the signup flow: the welcome email fired pre-commit → on rollback users got
+> orphaned mails (race w/ the DB txn). Moved the send post-commit + added 3x retry
+> w/ backoff — net-net, no more phantom emails. Should also marginally improve
+> signup latency.
 
 After `/spare-me`:
 
-> The duplicate rows are fixed. The cause: when a worker's lease expired, the retry
-> path handed the same job to a second worker. Both workers wrote results, and the
-> idempotency key only prevented duplicates when the first worker finished cleanly.
-> The fix is an epoch fence. Each time a worker takes the lease, it increments an
-> epoch number, and writes carrying an old epoch number are ignored. Duplicates are
-> now impossible by design, not just unlikely. One limitation: the fix adds one
-> integer comparison per write, and I have not measured the performance cost.
+> Signup emails are fixed. Before, the welcome email was sent before the database
+> saved the new account. If the save failed, the person still received a welcome
+> email for an account that did not exist. Now the email is sent only after the
+> account is saved, and a failed send retries three times. This may also make
+> signup slightly faster, but I have not measured it.
 
 ### Usage
 
