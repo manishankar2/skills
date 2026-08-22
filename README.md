@@ -101,3 +101,25 @@ You can also point it at something specific:
 
 Spare Me returns only the rewritten text. It does not add a preamble or explain what it
 changed.
+
+## Editing the rules
+
+The rules live in **one file: [`STANDARD.md`](STANDARD.md)**. Both installable versions are
+generated from it, so Claude Code, Codex, and Cursor always run the same standard.
+
+```bash
+python3 build.py           # regenerate both versions after editing STANDARD.md
+python3 build.py --check   # exit non-zero if either version is out of date
+```
+
+| Generated file | Used by |
+|---|---|
+| `plugins/spare-me/commands/spare-me.md` | Claude Code, through the plugin |
+| `skills/spare-me/SKILL.md` | Codex and Cursor, through the `curl` install above |
+
+Do not edit those two files by hand. Each one opens with a comment saying so, and any hand edit is
+overwritten the next time `build.py` runs. They are committed rather than built on install because
+the plugin marketplace and the `curl` command each fetch a real file from the repository.
+
+`build.py` owns only the parts that genuinely differ between the two formats: the frontmatter, and
+how each one names the text to rewrite. Everything else comes from `STANDARD.md`.
