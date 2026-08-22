@@ -76,3 +76,69 @@ Examples:
 - Avoid: "After signing the NDA, use the SOW to begin the POC."
 - Write: "After signing the non-disclosure agreement (NDA), use the statement of work (SOW) to begin
   the proof of concept (POC)."
+
+### Break Points Down
+
+A rule the reader has to re-read is a rule that gets skipped. Prefer structure over prose.
+
+- **One idea per bullet.** If a sentence carries two rules joined by "and", "while", or a dash,
+  make them two bullets.
+- **Ordered work becomes a numbered list.** Checks that run in sequence, stages of a process, and
+  setup steps are numbered, not written as a chain of clauses.
+- **A paragraph longer than about five lines is usually a list wearing a disguise.** Look for the
+  hidden list: a set of conditions, a set of guards, a set of consequences.
+- **Give a list a lead-in sentence that says what the list is.** "The checks run in this order and
+  refuse before anything is inserted:" beats an unlabelled list.
+- **State the rule first, then the reason.** "Only the primary track is consulted. It is what the
+  ripple arithmetic describes." Not the other way round.
+- **Keep the "why" — just move it.** Simplifying is not deleting. Every design reason in a document
+  is there because someone paid to learn it. Shorten the sentence; keep the fact.
+
+### Words to Avoid, and What to Write Instead
+
+Avoid insider vocabulary when a common word carries the same meaning. Standard technical terms
+that a working engineer uses daily are fine (`transaction`, `index`, `cache`, `timeout`). The words
+below are not — they are abstractions that hide which specific thing is meant.
+
+| Avoid | Write instead |
+|---|---|
+| provenance | who wrote it / where it came from / which item it came from |
+| cardinality | how many |
+| load-bearing | essential / the design depends on it |
+| idempotent | safe to run twice / safe to repeat |
+| materialize | build / write out |
+| hydrate | load |
+| mint | create |
+| ordinal | position number |
+| epsilon | tolerance / a small margin |
+| tombstone | a marker that blocks inheriting it |
+| CAS | compare-and-set — and say what is compared |
+| verbatim | word for word |
+| orthogonal | independent of |
+| arbiter | decides / the decider |
+| consumable | can be used exactly once |
+| seam | boundary / join / cut point — pick the one you mean |
+| fan-out | spread across / run in parallel — and name what is spread |
+| at-most-once | runs at most once |
+| fire-and-forget | a background task nobody waits on |
+| inert | changed nothing |
+| witness | record / the row that proves it |
+| honest-empty | an empty answer is a real answer |
+| content-addressed | keyed by a hash of its inputs, so the same inputs reuse the same file |
+| copy-on-write | copied only when written to (expand on first use, then use "CoW") |
+
+The table is a starting set, not a closed list. Apply the same test to any word in the target text:
+does it name one specific thing the reader can picture, or does it stand in for whatever the writer
+meant?
+
+Rules for the list:
+
+- **Expand an acronym the first time it appears, then use it freely.**
+- **Never expand an acronym you cannot verify.** Leave it as written and say you could not expand
+  it, rather than guessing.
+- **Keep real identifiers exactly as they are.** A class, function, column, flag, or event name is
+  a fact, not prose. Never paraphrase one.
+- **Project-specific stage and component names stay.** They are the names the team and the code
+  both use, so replacing them costs the reader more than it saves.
+- **When a hard word is genuinely necessary, define it once in plain words, then use it.** The fix
+  for an unavoidable term is a definition, not a vaguer substitute.
